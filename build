@@ -8,6 +8,9 @@ export CXX=clang++
 
 if [ ! -d "${build_dir}" ] ; then
     mkdir -p "${build_dir}"
+fi
+
+if [ ! -f "${build_dir}/build.ninja" ] ; then
     cd "${build_dir}"
     cmake "${script_dir}" -G "Ninja"
 fi

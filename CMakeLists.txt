@@ -8,5 +8,10 @@ add_library(settings INTERFACE)
 target_compile_features(settings INTERFACE cxx_std_17)
 target_compile_options(settings INTERFACE -pedantic -Wall -Werror)
 
-add_executable(blinktd source/blinktd.cc)
+add_executable(blinktd
+  source/blinktd.cc
+  source/blinkt.cc
+  source/gpio.cc
+  source/pixel.cc
+)
 target_link_libraries(blinktd PRIVATE settings)
