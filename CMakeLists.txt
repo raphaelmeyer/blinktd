@@ -10,6 +10,8 @@ add_library(settings INTERFACE)
 target_compile_features(settings INTERFACE cxx_std_17)
 target_compile_options(settings INTERFACE -pedantic -Wall -Werror)
 
+add_subdirectory(proto)
+
 add_executable(blinktd
   source/blinktd.cc
   source/blinkt.cc
@@ -18,4 +20,9 @@ add_executable(blinktd
   source/listener.cc
   source/socket.cc
 )
-target_link_libraries(blinktd PRIVATE settings Threads::Threads)
+target_link_libraries(blinktd
+  PRIVATE
+    blinkt-proto
+    settings
+    Threads::Threads
+)

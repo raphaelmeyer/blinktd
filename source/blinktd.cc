@@ -1,66 +1,33 @@
-#include "blinkt.h"
-#include "listener.h"
+#include "blinkt.grpc.pb.h"
 
-#include <atomic>
-#include <chrono>
-#include <csignal>
-#include <thread>
+#include <grpcpp/grpcpp.h>
 
 #include <iostream>
 
-namespace {
-std::atomic<bool> done = false;
+class BlinktImpl final : public Blinkt::Service {
+public:
+  grpc::Status Show(grpc::ServerContext* context, const google::protobuf::Empty* request, Response* response) override {
 
-void signal_handler(int signal)
-{
-  done = true;
-}
+    // _blinkt.show();
 
-} // namespace
+    response->set_result(Response::Success);
+    return grpc::Status::OK;
+  }
+
+};
 
 int main() {
+  std::string server_address{"0.0.0.0:7023"};
+  BlinktImpl service;
 
-  Listener server{7023};
+  grpc::ServerBuilder builder;
+  builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+  builder.RegisterService(&service);
+  std::unique_ptr<grpc::Server> server(builder.BuildAndStart());
 
-  server.listen([](std::string cmd){
-    std::cout << "handle command: \'" << cmd << "\'" << std::endl;
-    return std::string{};
-  });
+  std::cout << "Server listening on " << server_address << std::endl;
 
-  std::signal(SIGINT, signal_handler);
-  std::signal(SIGTERM, signal_handler);
-
-  while(not done) {
-    std::this_thread::sleep_for(std::chrono::seconds{1});
-  }
-
-  server.stop();
-
-/*
-  Blinkt blinkt;
-
-  for(std::size_t i = 0; i < 10; ++i) {
-    blinkt.clear();
-    blinkt.set(0, Brightness::Low, {31, 31, 31});
-    blinkt.set(2, Brightness::Low, {31, 31, 31});
-    blinkt.set(4, Brightness::Low, {31, 31, 31});
-    blinkt.set(6, Brightness::Low, {31, 31, 31});
-    blinkt.show();
-    std::this_thread::sleep_for(std::chrono::milliseconds{500});
-
-    blinkt.clear();
-    blinkt.set(1, Brightness::Low, {31, 31, 31});
-    blinkt.set(3, Brightness::Low, {31, 31, 31});
-    blinkt.set(5, Brightness::Low, {31, 31, 31});
-    blinkt.set(7, Brightness::Low, {31, 31, 31});
-    blinkt.show();
-    std::this_thread::sleep_for(std::chrono::milliseconds{500});
-  }
-
-  blinkt.clear();
-  blinkt.show();
-
-*/
+  server->Wait();
 
   return 0;
 }
