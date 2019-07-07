@@ -1,10 +1,42 @@
 #include "blinkt.h"
+#include "listener.h"
 
+#include <atomic>
 #include <chrono>
+#include <csignal>
 #include <thread>
+
+#include <iostream>
+
+namespace {
+std::atomic<bool> done = false;
+
+void signal_handler(int signal)
+{
+  done = true;
+}
+
+} // namespace
 
 int main() {
 
+  Listener server{7023};
+
+  server.listen([](std::string cmd){
+    std::cout << "handle command: \'" << cmd << "\'" << std::endl;
+    return std::string{};
+  });
+
+  std::signal(SIGINT, signal_handler);
+  std::signal(SIGTERM, signal_handler);
+
+  while(not done) {
+    std::this_thread::sleep_for(std::chrono::seconds{1});
+  }
+
+  server.stop();
+
+/*
   Blinkt blinkt;
 
   for(std::size_t i = 0; i < 10; ++i) {
@@ -27,6 +59,8 @@ int main() {
 
   blinkt.clear();
   blinkt.show();
+
+*/
 
   return 0;
 }
