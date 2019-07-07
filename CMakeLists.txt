@@ -17,8 +17,7 @@ add_executable(blinktd
   source/blinkt.cc
   source/gpio.cc
   source/pixel.cc
-  source/listener.cc
-  source/socket.cc
+  source/blinkt_service.cc
 )
 target_link_libraries(blinktd
   PRIVATE

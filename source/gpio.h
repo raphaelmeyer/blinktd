@@ -2,6 +2,8 @@
 
 #include <string>
 
+namespace blinkt {
+
 class Gpio {
 public:
   Gpio(std::string const & chip);
@@ -18,3 +20,5 @@ private:
   static int const DATA = 23;
   static int const CLK = 24;
 };
+
+} // namespace blinkt

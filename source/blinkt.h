@@ -5,6 +5,8 @@
 
 #include <array>
 
+namespace blinkt {
+
 struct Color {
   std::uint8_t r;
   std::uint8_t g;
@@ -40,3 +42,5 @@ private:
   Gpio _gpio;
   std::array<Led, NumPixels> _leds;
 };
+
+} // namespace blinkt

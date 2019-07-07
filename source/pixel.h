@@ -2,6 +2,8 @@
 
 #include <cstddef>
 
+namespace blinkt {
+
 class Pixel {
 public:
   Pixel() = default;
@@ -14,3 +16,5 @@ public:
 private:
   std::size_t _index;
 };
+
+} // namespace blinkt

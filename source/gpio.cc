@@ -10,6 +10,8 @@
 #include <thread>
 #include <chrono>
 
+namespace blinkt {
+
 Gpio::Gpio(std::string const & chip) {
   _chip = ::open(chip.c_str(), O_RDWR);
   if(_chip < 0) {
@@ -53,3 +55,5 @@ void Gpio::set(bool data, bool clk) {
     throw std::runtime_error(std::strerror(errno));
   }
 }
+
+} // namespace blinkt

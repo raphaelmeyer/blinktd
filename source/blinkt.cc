@@ -2,6 +2,8 @@
 
 #include "gpio.h"
 
+namespace blinkt {
+
 Blinkt::Blinkt()
 : _gpio{"/dev/gpiochip0"}
 , _leds{}
@@ -46,3 +48,5 @@ void Blinkt::write_byte(std::uint8_t value) {
     value <<= 1;
   }
 }
+
+} // namespace blinkt

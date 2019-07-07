@@ -2,6 +2,8 @@
 
 #include <stdexcept>
 
+namespace blinkt {
+
 Pixel::Pixel(std::size_t index)
 : _index{index}
 {
@@ -21,3 +23,5 @@ Pixel & Pixel::operator=(std::size_t index) {
 Pixel::operator std::size_t() const {
   return _index;
 }
+
+} // namespace blinkt
