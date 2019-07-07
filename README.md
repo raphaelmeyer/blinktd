@@ -1,6 +1,6 @@
 # blinktd
 
-A daemon for [https://shop.pimoroni.com/products/blinkt](Blinkt!)
+A daemon for [Blinkt!](https://shop.pimoroni.com/products/blinkt)
 
 [![Build Status](https://travis-ci.org/raphaelmeyer/blinktd.svg?branch=master)](https://travis-ci.org/raphaelmeyer/blinktd)
 
@@ -9,4 +9,3 @@ A daemon for [https://shop.pimoroni.com/products/blinkt](Blinkt!)
     git clone https://github.com/raphaelmeyer/blinktd.git
     cd blinktd
     ./build
-
