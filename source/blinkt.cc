@@ -31,9 +31,9 @@ void Blinkt::show() {
 
   for(auto const & led : _leds) {
     write_byte(static_cast<std::uint8_t>(led.brightness));
-    write_byte(led.color.r);
-    write_byte(led.color.g);
     write_byte(led.color.b);
+    write_byte(led.color.g);
+    write_byte(led.color.r);
   }
 
   for(std::size_t i = 0; i < 36; ++i) {
