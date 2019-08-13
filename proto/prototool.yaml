@@ -1,0 +1,17 @@
+protoc:
+  version: 3.7.0
+
+generate:
+  plugins:
+    - name: go
+      output: go
+
+    - name: cpp
+      output: cpp
+
+    - name: grpc
+      path: grpc_cpp_plugin
+      output: cpp
+
+lint:
+  group: uber2
