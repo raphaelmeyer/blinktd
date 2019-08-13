@@ -5,6 +5,6 @@ addons:
   apt:
     packages:
     - ninja-build
-    - protobuf
+    - protobuf-compiler
 
 script: ./build
