@@ -8,6 +8,8 @@ addons:
     - protobuf-compiler
 
 before_install:
-  - go get -v github.com/uber/prototool/cmd/prototool
+  - go get github.com/uber/prototool/cmd/prototool
+  - prototool version
+  - ${GOPATH}/bin/prototool version
 
 script: ./build
