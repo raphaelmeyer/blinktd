@@ -1,6 +1,9 @@
-dist: xenial
+dist: bionic
+compiler: clang
 
-before_install:
-  - sudo apt-get install -y ninja-build
+addons:
+  apt:
+    packages:
+    - ninja-build
 
 script: ./build
