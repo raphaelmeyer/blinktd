@@ -12,6 +12,7 @@ before_install:
     && git submodule update --init
     && make
     && sudo make install
+    && popd
   - go get github.com/golang/protobuf/protoc-gen-go
   - go get github.com/uber/prototool/cmd/prototool
   - prototool version
