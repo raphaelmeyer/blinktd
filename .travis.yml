@@ -7,17 +7,11 @@ addons:
     - ninja-build
 
 before_install:
-  - curl -L https://github.com/protocolbuffers/protobuf/releases/download/v3.7.0/protobuf-cpp-3.7.0.tar.gz | tar zx
-    && pushd protobuf-3.7.0
-    && ./configure --prefix=/usr
+  - git clone -b $(curl -L https://grpc.io/release) https://github.com/grpc/grpc
+  - pushd grpc
+    && git submodule update --init
     && make
     && sudo make install
-    && popd
-  - curl -L https://github.com/grpc/grpc/archive/v1.22.0.tar.gz | tar zx
-    && pushd grpc-1.22.0
-    && make
-    && sudo make install
-    && popd
   - go get github.com/golang/protobuf/protoc-gen-go
   - go get github.com/uber/prototool/cmd/prototool
   - prototool version
