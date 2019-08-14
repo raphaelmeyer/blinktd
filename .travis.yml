@@ -11,7 +11,7 @@ before_install:
   - pushd grpc
     && git submodule update --init
     && make
-    && pushd grpc/third_party/protobuf
+    && pushd third_party/protobuf
     && sudo make install
     && popd
     && sudo make install
