@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package blinkt.v1;
+
+option go_package = "blinktv1";
+option csharp_namespace = "Blinkt.V1";
+option java_multiple_files = true;
+option java_outer_classname = "BlinktApiProto";
+option java_package = "com.blinkt.v1";
+option objc_class_prefix = "BXX";
+
+import "blinkt_types.proto";
+
+// Service to communicate with a blinkt daemon.
+service BlinktAPI {
+  // Set color and brightness of an LED.
+  // The change is not displayed until Show is called.
+  rpc SetPixel(SetPixelRequest) returns (SetPixelResponse);
+  // Turn all LEDs off.
+  // The change is not displayed until Show is called.
+  rpc Clear(ClearRequest) returns (ClearResponse);
+  // Update all the LEDs.
+  rpc Show(ShowRequest) returns (ShowResponse);
+}
+
+message SetPixelRequest {
+  uint32 index = 1;
+  Brightness brightness = 2;
+  Color color = 3;
+}
+
+message SetPixelResponse {
+  Result result = 1;
+}
+
+message ClearRequest {}
+
+message ClearResponse {
+  Result result = 1;
+}
+
+message ShowRequest {}
+
+message ShowResponse {
+  Result result = 1;
+}

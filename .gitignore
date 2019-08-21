@@ -1,2 +1,7 @@
+# build script
 /_build/
+
+# clion
+/.idea/
+/cmake-build*/
 

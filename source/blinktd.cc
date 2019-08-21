@@ -6,7 +6,7 @@
 
 int main() {
   std::string server_address{"0.0.0.0:7023"};
-  BlinktService service;
+  blinkt::BlinktService service;
 
   grpc::ServerBuilder builder;
   builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());

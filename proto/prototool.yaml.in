@@ -15,3 +15,8 @@ generate:
 
 lint:
   group: uber2
+  ignores:
+    - id: FILE_OPTIONS_REQUIRE_PHP_NAMESPACE
+      files:
+      - blinkt_api.proto
+      - blinkt_types.proto
