@@ -6,6 +6,8 @@ if(NOT PROTOTOOL)
   message(FATAL_ERROR "prototool not found")
 endif()
 
+configure_file(prototool.yaml.in prototool.yaml @ONLY)
+
 add_custom_command(
   OUTPUT
     cpp/blinkt.grpc.pb.cc
@@ -15,8 +17,11 @@ add_custom_command(
   BYPRODUCTS
     go/blinkt.pb.go
   DEPENDS blinkt.proto
-  COMMAND ${PROTOTOOL} generate ${CMAKE_CURRENT_SOURCE_DIR}/blinkt.proto
-  COMMENT "Generate ${CMAKE_CURRENT_SOURCE_DIR}/blinkt.proto"
+  COMMAND
+    cmake -E copy ${CMAKE_CURRENT_SOURCE_DIR}/blinkt.proto ${CMAKE_CURRENT_BINARY_DIR}/blinkt.proto
+  COMMAND
+    ${PROTOTOOL} generate ${CMAKE_CURRENT_BINARY_DIR}/blinkt.proto
+  COMMENT "Generate from ${CMAKE_CURRENT_SOURCE_DIR}/blinkt.proto"
 )
 
 # blinkt-proto

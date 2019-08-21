@@ -1,17 +1,17 @@
 protoc:
-  version: 3.7.0
+  version: @Protobuf_VERSION@
 
 generate:
   plugins:
     - name: go
-      output: ../_build/proto/go
+      output: go
 
     - name: cpp
-      output: ../_build/proto/cpp
+      output: cpp
 
     - name: grpc
       path: grpc_cpp_plugin
-      output: ../_build/proto/cpp
+      output: cpp
 
 lint:
   group: uber2
