@@ -8,12 +8,12 @@ endif()
 
 add_custom_command(
   OUTPUT
-    ${CMAKE_CURRENT_SOURCE_DIR}/_gen/cpp/blinkt.grpc.pb.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/_gen/cpp/blinkt.grpc.pb.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/_gen/cpp/blinkt.pb.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/_gen/cpp/blinkt.pb.h
+    cpp/blinkt.grpc.pb.cc
+    cpp/blinkt.grpc.pb.h
+    cpp/blinkt.pb.cc
+    cpp/blinkt.pb.h
   BYPRODUCTS
-    ${CMAKE_CURRENT_SOURCE_DIR}/_gen/go/blinkt.pb.go
+    go/blinkt.pb.go
   DEPENDS blinkt.proto
   COMMAND ${PROTOTOOL} generate ${CMAKE_CURRENT_SOURCE_DIR}/blinkt.proto
   COMMENT "Generate ${CMAKE_CURRENT_SOURCE_DIR}/blinkt.proto"
@@ -21,13 +21,13 @@ add_custom_command(
 
 # blinkt-proto
 add_library(blinkt-proto
-  _gen/cpp/blinkt.pb.cc
-  _gen/cpp/blinkt.grpc.pb.cc
+  ${CMAKE_CURRENT_BINARY_DIR}/cpp/blinkt.pb.cc
+  ${CMAKE_CURRENT_BINARY_DIR}/cpp/blinkt.grpc.pb.cc
 )
 add_library(blinkt::proto ALIAS blinkt-proto)
 target_include_directories(blinkt-proto
   PUBLIC
-    _gen/cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/cpp
 )
 target_link_libraries(blinkt-proto
   PUBLIC

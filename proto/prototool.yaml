@@ -4,14 +4,14 @@ protoc:
 generate:
   plugins:
     - name: go
-      output: _gen/go
+      output: ../_build/proto/go
 
     - name: cpp
-      output: _gen/cpp
+      output: ../_build/proto/cpp
 
     - name: grpc
       path: grpc_cpp_plugin
-      output: _gen/cpp
+      output: ../_build/proto/cpp
 
 lint:
   group: uber2
