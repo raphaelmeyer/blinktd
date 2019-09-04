@@ -53,7 +53,7 @@ else()
     COMMAND
       protoc -I ${CMAKE_CURRENT_SOURCE_DIR} --grpc_out=${CMAKE_CURRENT_BINARY_DIR}/cpp --plugin=protoc-gen-grpc=/usr/bin/grpc_cpp_plugin ${PROTO_INPUT}
     COMMAND
-      protoc -I ${CMAKE_CURRENT_SOURCE_DIR} --cpp_out=${CMAKE_CURRENT_BINARY_DIR}/cpp blinkt_api.proto blinkt_types.proto ${PROTO_INPUT}
+      protoc -I ${CMAKE_CURRENT_SOURCE_DIR} --cpp_out=${CMAKE_CURRENT_BINARY_DIR}/cpp ${PROTO_INPUT}
     COMMENT "Generate code for ${PROTO_INPUT}"
   )
 
